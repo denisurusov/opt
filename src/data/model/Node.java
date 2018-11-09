@@ -11,12 +11,14 @@ public class Node {
     private String description;
     private SourceType nodeType;
     private float baseline;
+   protected float currentValue;
     //
     public Node(String description, Direction direction, SourceType type, float value) {
         this.description = description;
         this.direction = direction;
         this.nodeType = type;
         this.baseline = value;
+        this.currentValue=value;
     }
 
     public Direction getDirection() {
@@ -33,6 +35,10 @@ public class Node {
 
     public float getBaseline() {
         return baseline;
+    }
+
+    public float getCurrentValue() {
+        return currentValue;
     }
 
     @java.lang.Override
