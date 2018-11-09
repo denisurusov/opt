@@ -6,11 +6,13 @@ public class Node {
     private Direction  direction;
     private String     description;
     private SourceType nodeType;
+    private Number value;
 
-    public Node(String description, Direction direction, SourceType type) {
+    public Node(String description, Direction direction, SourceType type, Number value) {
         this.description = description;
         this.direction = direction;
         this.nodeType = type;
+        this.value=value;
     }
 
     public Direction getDirection() {
@@ -24,5 +26,11 @@ public class Node {
     public SourceType getType() {
         return this.nodeType;
     }
+    
+    public Number getValue()
+    {
+        return this.value;
+    }
+    
 
 }

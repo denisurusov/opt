@@ -1,8 +1,8 @@
 package data.model;
 
 
-public class Parameter<V> extends Node {
-    public Parameter(String name, Direction direction) {
-        super(name, direction, SourceType.STATIC);
+public class Parameter extends Node {
+    public Parameter(String name, Direction direction, Number value) {
+        super(name, direction, SourceType.STATIC, value);
     }
 }
