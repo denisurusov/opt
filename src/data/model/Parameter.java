@@ -10,11 +10,11 @@ public class Parameter extends Node {
     }
 
     public float increase() {
-        return this.currentValue=this.getBaseline() + this.delta;
+        return this.currentValue=this.currentValue + this.delta;
     }
 
     public float decrease() {
-        return this.currentValue=this.getBaseline() - this.delta;
+        return this.currentValue=this.currentValue - this.delta;
     }
 
 }
