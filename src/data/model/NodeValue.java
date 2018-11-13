@@ -3,21 +3,20 @@ package data.model;
 /*
 I hold and manage run-time values of the model node
  */
-public class NodeRuntime {
+public class NodeValue {
 
     private Node node;
-    private Function function;
-
     private float currentValue;
     private float baseline = 0;
 
-    public NodeRuntime(Node node) {
+    public NodeValue(Node node) {
         this.node = node;
     }
 
-    public NodeRuntime(Node node, float baseline) {
+    public NodeValue(Node node, float baseline) {
         this(node);
         this.baseline = baseline;
+        this.currentValue = baseline;
     }
 
     /*
@@ -42,13 +41,14 @@ public class NodeRuntime {
     }
 
     /*
-    compute value of this node  using set values of all dependencies
+    compute value of this node  using set values of all dependencies (run the formula with getters)
      */
-    public float compute() {
-        return this.currentValue = this.function.compute();
+    public float compute(Function function) {
+        return this.currentValue = function.compute();
     }
 
     public float getCurrentValue() {
         return currentValue;
     }
+
 }
