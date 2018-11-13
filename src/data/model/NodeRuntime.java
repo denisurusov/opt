@@ -1,8 +1,13 @@
 package data.model;
 
+/*
+I hold and manage run-time values of the model node
+ */
 public class NodeRuntime {
 
     private Node node;
+    private Function function;
+
     private float currentValue;
     private float baseline = 0;
 
@@ -40,7 +45,7 @@ public class NodeRuntime {
     compute value of this node  using set values of all dependencies
      */
     public float compute() {
-        return this.currentValue = this.node.compute();
+        return this.currentValue = this.function.compute();
     }
 
     public float getCurrentValue() {
