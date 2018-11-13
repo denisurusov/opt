@@ -1,24 +1,20 @@
 package data.model;
 
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 //
 public class Node {
     private Direction direction;
     private String description;
-    private SourceType nodeType;
-    private float baseline;
-   protected float currentValue;
+    private float step;
+    private Unit unit;
+    private Function function;
     //
-    public Node(String description, Direction direction, SourceType type, float value) {
+    public Node(String description, Direction direction, float step, Unit unit, Function function) {
         this.description = description;
         this.direction = direction;
-        this.nodeType = type;
-        this.baseline = value;
-        this.currentValue=value;
+        this.step = step;
+        this.unit=unit;
+        this.function=function;
     }
 
     public Direction getDirection() {
@@ -29,26 +25,23 @@ public class Node {
         return this.description;
     }
 
-    public SourceType getType() {
-        return this.nodeType;
+    public float getStep() {
+        return step;
     }
 
-    public float getBaseline() {
-        return baseline;
-    }
 
-    public float getCurrentValue() {
-        return currentValue;
-    }
-
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Node{" +
                 "direction=" + direction +
                 ", description='" + description + '\'' +
-                ", nodeType=" + nodeType +
-                ", baseline=" + baseline +
+                ", step=" + step +
+                ", unit=" + unit +
                 '}';
     }
 
+    public float compute()
+    {
+        return this.function.compute();
+    }
 }
