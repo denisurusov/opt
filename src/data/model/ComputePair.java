@@ -18,6 +18,22 @@ public class ComputePair {
         this.function.propagate();
     }
 
+    public void decrease() {
+        this.value.decrease();
+        this.function.propagate();
+    }
+    
+    public void set(float value)
+    {
+        this.value.set(value);
+        this.function.propagate();
+    }
+    
+    public void reset()
+    {
+        this.value.reset();
+    }
+
     public float getValue() {
         return this.value.getCurrentValue();
     }

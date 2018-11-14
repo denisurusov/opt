@@ -20,7 +20,7 @@ public abstract class Function {
     }
 
     public void propagate() {
-        this.linkedNames.stream().forEach(s -> this.model.getComputePair(s).compute());
+        this.linkedNames.stream().forEach(s -> this.model.compute(s));
     }
 
     @Override

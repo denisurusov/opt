@@ -32,12 +32,17 @@ public class NodeValue {
     public float decrease() {
         return this.currentValue = this.currentValue - node.getStep();
     }
+    
+    public float set(float value) {
+        return this.currentValue = value;
+    }
 
     /*
     reset current value to what the model run was seeded with
      */
     public void reset() {
         this.currentValue = this.baseline;
+        System.out.println ("Resetting " + this + " to " + this.currentValue);
     }
 
     /*

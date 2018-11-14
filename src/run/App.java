@@ -5,7 +5,6 @@ import data.model.impl.*;
 
 import java.util.HashMap;
 
-//TODO - implement reset
 //TODO - implement setters
 //TODO - unit test
 public class App implements Model {
@@ -23,18 +22,50 @@ public class App implements Model {
                 new FunctionHourlyRate(this)));
         computeEngine.put(Node.HEADCOUNT, new ComputePair(new NodeValue(new Node("Number of analysts we can afford", Direction.DOWN, 1, Unit.PEOPLE)),
                 new FunctionHeadcount(this)));
-
-        computeEngine.keySet().stream().forEach(s -> System.out.println(computeEngine.get(s).toString()));
-
-        System.out.println(computeEngine.get(Node.HEADCOUNT).compute());
-        System.out.println(computeEngine.get(Node.HEADCOUNT).getValue());
-        //
-        System.out.println(computeEngine.get(Node.HOURS_A_DAY).compute());
     }
 
+   @Override 
+   public float compute (String nodeName)
+   {
+        return this.computeEngine.get(nodeName).compute();        
+   }
+   
     @Override
-    public ComputePair getComputePair(String name) {
-        return this.computeEngine.get(name);
+    public void reset()
+    {
+        System.out.println ("Resetting the model...");
+        this.computeEngine.values().stream().forEach(v->v.reset());
+        System.out.println ("Resetting complete.");
+    }
+    
+    @Override
+    public float getValue (String nodeName)
+    {
+        return this.computeEngine.get(nodeName).getValue();
+    }
+    
+    @Override
+    public void setValue (String nodeName, float value)
+    {
+         this.computeEngine.get(nodeName).set(value);
+    }
+    
+    @Override
+    public void increase (String nodeName)
+    {
+        this.computeEngine.get(nodeName).increase();
+    }
+    
+    @Override
+    public void decrease (String nodeName)
+    {
+        this.computeEngine.get(nodeName).decrease();
+    }
+    
+    //TODO proper toString
+    public void print()
+    {
+        computeEngine.keySet().stream().forEach(s -> System.out.println(computeEngine.get(s).toString()));
     }
 }
 

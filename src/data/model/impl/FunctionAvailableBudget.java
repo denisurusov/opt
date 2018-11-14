@@ -23,9 +23,14 @@ public class FunctionAvailableBudget extends Function {
     }
 
     public float compute() {
-        return this.formula.compute(this.model.getComputePair(Node.DAYS_A_YEAR).getValue(),
-                this.model.getComputePair(Node.HOURS_A_DAY).getValue(),
-                this.model.getComputePair(Node.HOURLY_RATE).getValue(),
-                this.model.getComputePair(Node.HEADCOUNT).getValue());
+        System.out.println ("Computing with " + this.model.getValue(Node.HEADCOUNT));
+        System.out.println ("Computing with " + this.model.getValue(Node.DAYS_A_YEAR));
+        System.out.println ("Computing with " + this.model.getValue(Node.HOURS_A_DAY));
+        System.out.println ("Computing with " + this.model.getValue(Node.HOURLY_RATE));
+        //
+        return this.formula.compute(this.model.getValue(Node.DAYS_A_YEAR),
+                this.model.getValue(Node.HOURS_A_DAY),
+                this.model.getValue(Node.HOURLY_RATE),
+                this.model.getValue(Node.HEADCOUNT));
     }
 }
