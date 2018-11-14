@@ -1,53 +1,40 @@
 package run;
 
 import data.model.*;
-import data.model.impl.FunctionHeadcount;
-import data.model.impl.FunctionHoursADay;
+import data.model.impl.*;
 
 import java.util.HashMap;
 
-public class App {
+//TODO - implement reset
+//TODO - implement setters
+//TODO - unit test
+public class App implements Model {
 
-    public static void main(String[] args) {
+    private HashMap<String, ComputePair> computeEngine = new HashMap<>();
+
+    public void run() {
+        computeEngine.put(Node.AVAILABLE_BUDGET, new ComputePair(new NodeValue(new Node("Annual onboarding budget", Direction.DOWN, 1000000, Unit.DOLLARS), 16000000),
+                new FunctionAvailableBudget(this)));
+        computeEngine.put(Node.DAYS_A_YEAR, new ComputePair(new NodeValue(new Node("Number of work days a year", Direction.UP, 1, Unit.DAYS), 262),
+                new FunctionDaysAYear(this)));
+        computeEngine.put(Node.HOURS_A_DAY, new ComputePair(new NodeValue(new Node("Number of work hours a day", Direction.UP, 1, Unit.Hours), 8),
+                new FunctionHoursADay(this)));
+        computeEngine.put(Node.HOURLY_RATE, new ComputePair(new NodeValue(new Node("Analyst hourly rate", Direction.DOWN, 10, Unit.DOLLARS), 40),
+                new FunctionHourlyRate(this)));
+        computeEngine.put(Node.HEADCOUNT, new ComputePair(new NodeValue(new Node("Number of analysts we can afford", Direction.DOWN, 1, Unit.PEOPLE)),
+                new FunctionHeadcount(this)));
+
+        computeEngine.keySet().stream().forEach(s -> System.out.println(computeEngine.get(s).toString()));
+
+        System.out.println(computeEngine.get(Node.HEADCOUNT).compute());
+        System.out.println(computeEngine.get(Node.HEADCOUNT).getValue());
         //
-        HashMap<String, ComputePair> computeEngine = new HashMap<>();
+        System.out.println(computeEngine.get(Node.HOURS_A_DAY).compute());
+    }
 
-        // write your code here
-        NodeValue hoursADay = new NodeValue(new Node("Number of work hours a day", Direction.UP, 1, Unit.Hours), 8);
-        NodeValue daysAYear = new NodeValue(new Node("Number of work days a year", Direction.UP, 1, Unit.DAYS), 262);
-        NodeValue budget = new NodeValue(new Node("Annual onboarding budget", Direction.DOWN, 1000000, Unit.DOLLARS), 16000000);
-        NodeValue hourlyRate = new NodeValue(new Node("Analyst hourly rate", Direction.DOWN, 10, Unit.DOLLARS), 40);
-        NodeValue headCount = new NodeValue(new Node("Number of analysts we can afford", Direction.DOWN, 1, Unit.PEOPLE));
-
-
-        computeEngine.put("headcount", new ComputePair(headCount, new FunctionHeadcount(budget, daysAYear, hoursADay, hourlyRate)));
-        computeEngine.put("hoursADay", new ComputePair(hoursADay, new FunctionHoursADay(budget, daysAYear, hourlyRate, headCount)));
-
-        System.out.println(computeEngine.get("headcount").compute());
-        System.out.println(computeEngine.get("headcount").getValue());
-        //
-        System.out.println(computeEngine.get("hoursADay").compute());
+    @Override
+    public ComputePair getComputePair(String name) {
+        return this.computeEngine.get(name);
     }
 }
 
-class ComputePair {
-    private NodeValue value;
-    private Function function;
-
-    public ComputePair(NodeValue runtime, Function function) {
-        this.value = runtime;
-        this.function = function;
-    }
-
-    public float compute() {
-        return this.value.compute(this.function);
-    }
-
-    public float increase() {
-        return this.value.increase();
-    }
-
-    public float getValue() {
-        return this.value.getCurrentValue();
-    }
-}

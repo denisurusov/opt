@@ -1,33 +1,32 @@
 package data.model.impl;
 
 import data.model.Function;
-import data.model.NodeValue;
+import data.model.Node;
+import run.Model;
 
 public class FunctionHeadcount extends Function {
-    private NodeValue budget;
-    private NodeValue hoursADay;
-    private NodeValue daysAYear;
-    private NodeValue hourlyRate;
+    private Formula formula;
 
     //
     @FunctionalInterface
     interface Formula {
-        public float compute(float budget, float daysAYear, float hoursADay, float rate);
+        float compute(float budget, float daysAYear, float hoursADay, float rate);
     }
 
-    private Formula formula;
-
-    public FunctionHeadcount(NodeValue budget, NodeValue daysAYear, NodeValue hoursADay, NodeValue hourlyRate) {
-        this.hourlyRate = hourlyRate;
-        this.hoursADay = hoursADay;
-        this.daysAYear = daysAYear;
-        this.budget = budget;
-
+    public FunctionHeadcount(Model model) {
+        super(model);
+        this.linkedNames.add(Node.AVAILABLE_BUDGET);
+        this.linkedNames.add(Node.DAYS_A_YEAR);
+        this.linkedNames.add(Node.HOURS_A_DAY);
+        this.linkedNames.add(Node.HOURLY_RATE);
         this.formula = (a, b, c, d) -> a / b / c / d;
     }
 
     public float compute() {
-        return this.formula.compute(this.budget.getCurrentValue(), this.daysAYear.getCurrentValue(), this.hoursADay.getCurrentValue(), this.hourlyRate.getCurrentValue());
+        return this.formula.compute(this.model.getComputePair(Node.AVAILABLE_BUDGET).getValue(),
+                this.model.getComputePair(Node.DAYS_A_YEAR).getValue(),
+                this.model.getComputePair(Node.HOURS_A_DAY).getValue(),
+                this.model.getComputePair(Node.HOURLY_RATE).getValue());
     }
 }
 

@@ -5,15 +5,15 @@ import data.model.Node;
 import run.Model;
 
 
-public class FunctionHoursADay extends Function {
+public class FunctionHourlyRate extends Function {
     private Formula formula;
 
     @FunctionalInterface
     interface Formula {
-        float compute(float budget, float daysAYear, float rate, float headCount);
+        float compute(float budget, float daysAYear, float hoursADay, float headCount);
     }
 
-    public FunctionHoursADay(Model model) {
+    public FunctionHourlyRate(Model model) {
         super(model);
         this.linkedNames.add(Node.AVAILABLE_BUDGET);
         this.linkedNames.add(Node.DAYS_A_YEAR);
@@ -25,7 +25,7 @@ public class FunctionHoursADay extends Function {
     public float compute() {
         return this.formula.compute(this.model.getComputePair(Node.AVAILABLE_BUDGET).getValue(),
                 this.model.getComputePair(Node.DAYS_A_YEAR).getValue(),
-                this.model.getComputePair(Node.HOURLY_RATE).getValue(),
+                this.model.getComputePair(Node.HOURS_A_DAY).getValue(),
                 this.model.getComputePair(Node.HEADCOUNT).getValue());
     }
 }

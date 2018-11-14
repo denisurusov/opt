@@ -7,6 +7,13 @@ import java.util.Objects;
     I hold the meta data about this particular model node
  */
 public class Node {
+    public static final String HOURS_A_DAY = "hours a day";
+    public static final String DAYS_A_YEAR = "days a year";
+    public static final String AVAILABLE_BUDGET = "available budget";
+    public static final String HEADCOUNT = "headcount";
+    public static final String HOURLY_RATE = "hourly rate";
+
+    //
     private Direction direction;
     private String description;
     private float step;

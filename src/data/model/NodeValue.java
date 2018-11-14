@@ -51,4 +51,12 @@ public class NodeValue {
         return currentValue;
     }
 
+    @Override
+    public String toString() {
+        return "NodeValue{" +
+                "node=" + node +
+                ", currentValue=" + currentValue +
+                ", baseline=" + baseline +
+                '}';
+    }
 }
