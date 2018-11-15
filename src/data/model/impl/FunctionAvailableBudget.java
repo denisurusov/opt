@@ -23,11 +23,6 @@ public class FunctionAvailableBudget extends Function {
     }
 
     public float compute() {
-        System.out.println ("Computing with " + this.model.getValue(Node.HEADCOUNT));
-        System.out.println ("Computing with " + this.model.getValue(Node.DAYS_A_YEAR));
-        System.out.println ("Computing with " + this.model.getValue(Node.HOURS_A_DAY));
-        System.out.println ("Computing with " + this.model.getValue(Node.HOURLY_RATE));
-        //
         return this.formula.compute(this.model.getValue(Node.DAYS_A_YEAR),
                 this.model.getValue(Node.HOURS_A_DAY),
                 this.model.getValue(Node.HOURLY_RATE),

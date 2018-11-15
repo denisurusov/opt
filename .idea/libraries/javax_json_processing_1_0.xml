@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="javax.json.processing-1.0" type="JsonProcessing">
+    <properties version="1.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/javax/json/javax.json-api/1.0/javax.json.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

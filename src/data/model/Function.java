@@ -26,7 +26,7 @@ public abstract class Function {
     @Override
     public String toString() {
         return "Function{" +
-                "model=" + model +
+                "class=" + this.getClass().getCanonicalName() +
                 ", linkedNames=" + linkedNames +
                 '}';
     }

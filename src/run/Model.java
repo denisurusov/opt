@@ -1,10 +1,15 @@
 package run;
 
 public interface Model {
-    public void reset();
-    public float getValue (String nodeName);
-    public void setValue (String nodeName, float value);
-    public void increase (String nodeName);
-    public void decrease (String nodeName);
-    public float compute (String nodeName);
+    void reset();
+
+    float getValue(String nodeName);
+
+    void setValue(String nodeName, float value);
+
+    void increase(String nodeName);
+
+    void decrease(String nodeName);
+
+    float compute(String nodeName);
 }

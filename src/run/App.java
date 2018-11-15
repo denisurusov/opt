@@ -5,7 +5,6 @@ import data.model.impl.*;
 
 import java.util.HashMap;
 
-//TODO - implement setters
 //TODO - unit test
 public class App implements Model {
 
@@ -24,48 +23,41 @@ public class App implements Model {
                 new FunctionHeadcount(this)));
     }
 
-   @Override 
-   public float compute (String nodeName)
-   {
-        return this.computeEngine.get(nodeName).compute();        
-   }
-   
     @Override
-    public void reset()
-    {
-        System.out.println ("Resetting the model...");
-        this.computeEngine.values().stream().forEach(v->v.reset());
-        System.out.println ("Resetting complete.");
+    public float compute(String nodeName) {
+        return this.computeEngine.get(nodeName).compute();
     }
-    
+
     @Override
-    public float getValue (String nodeName)
-    {
+    public void reset() {
+        System.out.println("Resetting the model...");
+        this.computeEngine.values().stream().forEach(v -> v.reset());
+        System.out.println("Resetting complete.");
+    }
+
+    @Override
+    public float getValue(String nodeName) {
         return this.computeEngine.get(nodeName).getValue();
     }
-    
+
     @Override
-    public void setValue (String nodeName, float value)
-    {
-         this.computeEngine.get(nodeName).set(value);
+    public void setValue(String nodeName, float value) {
+        this.computeEngine.get(nodeName).set(value);
     }
-    
+
     @Override
-    public void increase (String nodeName)
-    {
+    public void increase(String nodeName) {
         this.computeEngine.get(nodeName).increase();
     }
-    
+
     @Override
-    public void decrease (String nodeName)
-    {
+    public void decrease(String nodeName) {
         this.computeEngine.get(nodeName).decrease();
     }
-    
-    //TODO proper toString
-    public void print()
-    {
-        computeEngine.keySet().stream().forEach(s -> System.out.println(computeEngine.get(s).toString()));
+
+    @Override
+    public String toString() {
+        return "Model printout:\n" + this.computeEngine.values().stream().map(s -> s.toString() + "\n").reduce("", String::concat);
     }
 }
 
