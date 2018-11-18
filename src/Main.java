@@ -1,30 +1,26 @@
 import data.model.Node;
-import run.App;
-
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
+import run.Model;
+import run.ModelLoader;
+import run.SimpleModel;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        try {
+            System.out.println("Model initialization start...");
+            Model model = new ModelLoader().load(SimpleModel.class.getClassLoader().getResourceAsStream("model.runs.json5"));
+            System.out.println(model);
+            System.out.println("Model initialization complete.");
+            model.compute(Node.HEADCOUNT);
+            model.setValue(Node.HEADCOUNT, 500);
 
-        System.out.println("Initializing model.....");
-        App app = new App();
-        javax.json.JsonReader jsonReader = Json.createReader(App.class.getClassLoader().getResourceAsStream("mode.run.json5"));
-        JsonObject personObject = jsonReader.readObject();
 
-        JsonArray runs = personObject.getJsonArray("runs");
+            model.reset();
+            System.out.println("Model run complete.");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
-        app.run();
-        System.out.println(app);
-        
-        app.compute(Node.HEADCOUNT);
-        app.setValue(Node.HEADCOUNT, 500);
-        System.out.println(app);
-        
-        app.reset();
-        System.out.println("Model run complete.");
     }
 }

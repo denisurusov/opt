@@ -15,7 +15,7 @@ public abstract class Function {
 
     protected abstract float compute();
 
-    protected Function(Model model) {
+    public Function(Model model) {
         this.model = model;
     }
 

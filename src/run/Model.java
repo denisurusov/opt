@@ -1,15 +1,26 @@
 package run;
 
-public interface Model {
-    void reset();
+import data.model.ComputePair;
 
-    float getValue(String nodeName);
+import java.util.HashMap;
 
-    void setValue(String nodeName, float value);
+public abstract class Model {
+    protected HashMap<String, ComputePair> computeEngine = new HashMap<>();
 
-    void increase(String nodeName);
+    protected void addNode(String key, ComputePair pair) {
+        computeEngine.put(key, pair);
+    }
 
-    void decrease(String nodeName);
+    public abstract void reset();
 
-    float compute(String nodeName);
+    public abstract float getValue(String nodeName);
+
+    public abstract void setValue(String nodeName, float value);
+
+    public abstract void increase(String nodeName);
+
+    public abstract void decrease(String nodeName);
+
+    public abstract float compute(String nodeName);
+
 }
