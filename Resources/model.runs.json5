@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "id": "available budget",
+      "description": "Annual onboarding budget",
+      "direction": "DOWN",
+      "step": 1000000,
+      "unit": "DOLLARS",
+      "baseline": 16000000,
+      "functionClassName": "data.model.impl.FunctionAvailableBudget"
+    },
+    {
+      "id": "days a year",
+      "description": "Number of work days a year",
+      "direction": "UP",
+      "step": 1,
+      "unit": "DAYS",
+      "baseline": 252,
+      "functionClassName": "data.model.impl.FunctionDaysAYear"
+    },
+    {
+      "id": "hours a day",
+      "description": "Number of work hours a day",
+      "direction": "UP",
+      "step": 1,
+      "unit": "HOURS",
+      "baseline": 8,
+      "functionClassName": "data.model.impl.FunctionHoursADay"
+    },
+    {
+      "id": "headcount",
+      "description": "Number of analysts we can afford",
+      "direction": "UP",
+      "step": 1,
+      "unit": "PEOPLE",
+      "functionClassName": "data.model.impl.FunctionHeadcount"
+    },
+    {
+      "id": "hourly rate",
+      "description": "Analyst hourly rate",
+      "direction": "DOWN",
+      "step": 1,
+      "unit": "DOLLARS",
+      "baseline": 40,
+      "functionClassName": "data.model.impl.FunctionHourlyRate"
+    }
+  ],
+  "runs": [
+    {
+      "id": "1",
+      //change the value of one node (source) and recompute the value of another node (target). All other nodes' value are frozen
+      "description": "increase work days and see how much this will cost",
+      "type": "node-to-node",
+      "source": {
+        "id": "days a year"
+      },
+      "target": {
+        "id": "available budget"
+      }
+    },
+    {
+      "id": "2",
+      //change one node and recompute other (specified) nodes according to priority (order), direction and limits
+      "description": "what is the impact of working more days on the budget and another node (up to a limit) and then the other node (up to a limit)",
+      "type": "model walk",
+      "source": {
+        "id": "days a year"
+      },
+      "targets": [
+        //in order
+        {
+          "id": "hours a day",
+          "direction": "up",
+          "limit": "500"
+        },
+        {
+          "id": "available budget",
+          "direction": "down",
+          "limit": "50"
+        }
+      ]
+    }
+  ]
+}
