@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class ModelLoader {
 
-    public Model load(InputStream is) {
+    public Model load(InputStream is) throws ModelLoadingException {
         SimpleModel model = new SimpleModel();
 
         try {
@@ -34,7 +34,7 @@ public class ModelLoader {
                 model.addNode(nextNode.get("id").asText(), new ComputePair(new NodeValue(node, baseline), (Function) (c.getConstructor(Model.class).newInstance(model))));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ModelLoadingException("Model loading failure", e);
         }
         return model;
     }
