@@ -7,7 +7,7 @@
       "step": 1000000,
       "unit": "DOLLARS",
       "baseline": 16000000,
-      "functionClassName": "data.model.impl.FunctionAvailableBudget"
+      "functionClassName": "data.model.function.FunctionAvailableBudget"
     },
     {
       "id": "days a year",
@@ -16,7 +16,7 @@
       "step": 1,
       "unit": "DAYS",
       "baseline": 252,
-      "functionClassName": "data.model.impl.FunctionDaysAYear"
+      "functionClassName": "data.model.function.FunctionDaysAYear"
     },
     {
       "id": "hours a day",
@@ -25,7 +25,7 @@
       "step": 1,
       "unit": "HOURS",
       "baseline": 8,
-      "functionClassName": "data.model.impl.FunctionHoursADay"
+      "functionClassName": "data.model.function.FunctionHoursADay"
     },
     {
       "id": "headcount",
@@ -33,7 +33,7 @@
       "direction": "UP",
       "step": 1,
       "unit": "PEOPLE",
-      "functionClassName": "data.model.impl.FunctionHeadcount"
+      "functionClassName": "data.model.function.FunctionHeadcount"
     },
     {
       "id": "hourly rate",
@@ -42,7 +42,7 @@
       "step": 1,
       "unit": "DOLLARS",
       "baseline": 40,
-      "functionClassName": "data.model.impl.FunctionHourlyRate"
+      "functionClassName": "data.model.function.FunctionHourlyRate"
     }
   ],
   "runs": [
