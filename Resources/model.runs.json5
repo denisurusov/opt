@@ -48,9 +48,8 @@
   "runs": [
     {
       "id": "1",
-      //change the value of one node (source) and recompute the value of another node (target). All other nodes' value are frozen
       "description": "increase work days and see how much this will cost",
-      "type": "node-to-node",
+      "type": "NODE_TO_NODE",
       "source": {
         "id": "days a year"
       },
@@ -60,9 +59,8 @@
     },
     {
       "id": "2",
-      //change one node and recompute other (specified) nodes according to priority (order), direction and limits
       "description": "what is the impact of working more days on the budget and another node (up to a limit) and then the other node (up to a limit)",
-      "type": "model walk",
+      "type": "MODEL_WALK",
       "source": {
         "id": "days a year"
       },
