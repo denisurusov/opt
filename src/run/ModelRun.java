@@ -1,29 +1,18 @@
 package run;
 
-public class ModelRun {
+public abstract class ModelRun {
 
     private String id;
-    private String type;
+    private RunnerType type;
     private String description;
 
-    public ModelRun(String id, String type, String description) {
+    public ModelRun(String id, RunnerType type, String description) {
         this.id = id;
         this.type = type;
         this.description = description;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
+    public abstract void execute(Model model);
 
     @Override
     public String toString() {

@@ -34,7 +34,7 @@ public class ModelLoader {
                 model.addNode(nextNode.get("id").asText(), new ComputePair(new NodeValue(node, baseline), (Function) (c.getConstructor(Model.class).newInstance(model))));
             }
         } catch (Exception e) {
-            throw new ModelLoadingException("Model loading failure", e);
+            throw new ModelLoadingException("Model loading failure - could not load model nodes", e);
         }
         return model;
     }

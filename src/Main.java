@@ -1,7 +1,6 @@
-import run.Model;
-import run.ModelLoader;
-import run.ModelLoadingException;
-import run.SimpleModel;
+import run.*;
+
+import java.util.List;
 
 public class Main {
 
@@ -9,11 +8,15 @@ public class Main {
 
         try {
             System.out.println("Model initialization start...");
-            Model model = new ModelLoader().load(SimpleModel.class.getClassLoader().getResourceAsStream("model.runs.json5"));
+            Model model = new ModelLoader().load(ModelLoader.class.getClassLoader().getResourceAsStream("model.runs.json5"));
+            List<ModelRun> runs = new RunLoader().load(RunLoader.class.getClassLoader().getResourceAsStream("model.runs.json5"));
+            //TODO for each run - pass the  model and have it execute
+            //TODO reset model between the runs
+
             System.out.println(model);
             System.out.println("Model initialization complete.");
         } catch (ModelLoadingException e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
 
     }

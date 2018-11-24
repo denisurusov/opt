@@ -5,37 +5,46 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 
 public class RunLoader {
 
-    public void load(InputStream is) throws ModelLoadingException {
-        SimpleModel model = new SimpleModel();
+
+    public List<ModelRun> load(InputStream is) throws ModelLoadingException {
+
+        List<ModelRun> returnList = new ArrayList<>();
 
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(JsonParser.Feature.ALLOW_COMMENTS);
             JsonNode root = mapper.readTree(is);
-            //
+            //FIXME too many fail points
+            //TODO - might want to cross-check the nodes used as sources and targets
             Iterator<JsonNode> jsonRunNodes = root.get("runs").elements();
 
             while (jsonRunNodes != null && jsonRunNodes.hasNext()) {
                 JsonNode nextRun = jsonRunNodes.next();
-                //
-                String runId = nextRun.get("id").asText();
-                String description = nextRun.get("description").asText();
-                String type = nextRun.get("description").asText();
-                //
-//                Direction.valueOf(nextRun.get("direction").asText()),
-//                        nextRun.get("step").floatValue(),
-//                        Unit.valueOf(nextRun.get("unit").asText()));
-//                float baseline = nextRun.has("baseline") ? nextRun.get("baseline").floatValue() : 0;
-//                //
-//                Class<?> c = Class.forName(nextRun.get("functionClassName").asText());
-//                model.addNode(nextRun.get("id").asText(), new ComputePair(new NodeValue(node, baseline), (Function) (c.getConstructor(Model.class).newInstance(model))));
+                RunnerType type = RunnerType.valueOf(nextRun.get("type").asText());
+                switch (type) {
+                    case NODE_TO_NODE: {
+                        returnList.add(new ModelRunNodeToNode(nextRun.get("id").asText(),
+                                type,
+                                nextRun.get("description").asText(),
+                                nextRun.get("source").get("id").asText(),
+                                nextRun.get("target").get("id").asText()));
+                        break;
+                    }
+                    case MODEL_WALK: {
+
+                    }
+                }
             }
         } catch (Exception e) {
-            throw new ModelLoadingException("Model loading failure", e);
+            throw new ModelLoadingException("Model loading failure - could not load model runs", e);
         }
+        return returnList;
     }
 }
