@@ -7,11 +7,23 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            System.out.println("Model initialization start...");
+            //TODO mebbe there needs to be two configs - one for nodes, one for runs
+            //pros - cleaner
+            //cons - harder to cross-reference while authoring
+            //perhaps there has to be a DSL syntax for this.
+
+            System.out.println("model loading starting...");
             Model model = new ModelLoader().load(ModelLoader.class.getClassLoader().getResourceAsStream("model.runs.json5"));
+            System.out.println(model.toString());
+            System.out.println("model loading completed.");
+
             List<ModelRun> runs = new RunLoader().load(RunLoader.class.getClassLoader().getResourceAsStream("model.runs.json5"));
-            //TODO for each run - pass the  model and have it execute
-            //TODO reset model between the runs
+
+            runs.forEach(r -> {
+                System.out.println(r.toString());
+                r.execute(model);
+                model.reset();
+            });
 
             System.out.println(model);
             System.out.println("Model initialization complete.");

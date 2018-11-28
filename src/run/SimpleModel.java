@@ -10,9 +10,9 @@ public class SimpleModel extends Model {
 
     @Override
     public void reset() {
-        System.out.println("Resetting the model...");
+        System.out.println("Model reset start...");
         this.computeEngine.values().stream().forEach(v -> v.reset());
-        System.out.println("Resetting complete.");
+        System.out.println("Model reset complete.");
     }
 
     @Override

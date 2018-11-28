@@ -3,10 +3,10 @@ package run;
 public abstract class ModelRun {
 
     private String id;
-    private RunnerType type;
+    protected RunnerType type;
     private String description;
 
-    public ModelRun(String id, RunnerType type, String description) {
+    protected ModelRun(String id, RunnerType type, String description) {
         this.id = id;
         this.type = type;
         this.description = description;

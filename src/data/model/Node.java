@@ -16,6 +16,7 @@ public class Node {
     //
     private String description;
     private Unit unit;
+    //TODO perhaps this is the default (natural?) direction. Each model run could override it the direction based on the model logic and purpose
     private Direction direction;
     private float step;
 

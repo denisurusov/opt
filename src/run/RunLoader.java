@@ -3,10 +3,10 @@ package run;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import data.model.Direction;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -23,15 +23,13 @@ public class RunLoader {
             JsonNode root = mapper.readTree(is);
             //FIXME too many fail points
             //TODO - might want to cross-check the nodes used as sources and targets
-            Iterator<JsonNode> jsonRunNodes = root.get("runs").elements();
+            root.get("runs").elements().forEachRemaining(nextRun -> {
 
-            while (jsonRunNodes != null && jsonRunNodes.hasNext()) {
-                JsonNode nextRun = jsonRunNodes.next();
                 RunnerType type = RunnerType.valueOf(nextRun.get("type").asText());
                 switch (type) {
                     case NODE_TO_NODE: {
                         returnList.add(new ModelRunNodeToNode(nextRun.get("id").asText(),
-                                type,
+                                RunnerType.NODE_TO_NODE,
                                 nextRun.get("description").asText(),
                                 nextRun.get("source").get("id").asText(),
                                 nextRun.get("target").get("id").asText()));
@@ -39,9 +37,19 @@ public class RunLoader {
                     }
                     case MODEL_WALK: {
 
+                        ModelRunWalk run = new ModelRunWalk(nextRun.get("id").asText(),
+                                RunnerType.MODEL_WALK,
+                                nextRun.get("description").asText(),
+                                nextRun.get("source").get("id").asText());
+
+                        nextRun.get("targets").elements().forEachRemaining(target -> {
+                            run.addTarget(run.new Target(target.get("id").asText(), Direction.valueOf(target.get("direction").asText()), target.get("limit").floatValue()));
+                        });
+                        returnList.add(run);
                     }
                 }
-            }
+            });
+
         } catch (Exception e) {
             throw new ModelLoadingException("Model loading failure - could not load model runs", e);
         }
