@@ -1,4 +1,6 @@
 {
+  //FIXME proper optimization engines separate model object definitions from instances
+  //what we got below is neither here nor there, but ok for POC
   "nodes": [
     {
       "id": "available budget",
@@ -68,13 +70,13 @@
         //in order
         {
           "id": "hours a day",
-          "direction": "up",
-          "limit": "500"
+          "direction": "UP",
+          "limit": 500
         },
         {
           "id": "available budget",
-          "direction": "down",
-          "limit": "50"
+          "direction": "DOWN",
+          "limit": 50
         }
       ]
     }
