@@ -32,6 +32,7 @@ public class RunLoader {
                                 RunnerType.NODE_TO_NODE,
                                 nextRun.get("description").asText(),
                                 nextRun.get("source").get("id").asText(),
+                                nextRun.get("source").get("newValue").floatValue(),
                                 nextRun.get("target").get("id").asText()));
                         break;
                     }

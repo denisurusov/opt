@@ -23,9 +23,10 @@ public class FunctionHoursADay extends Function {
     }
 
     public float compute() {
-        return this.formula.compute(this.model.getValue(Node.AVAILABLE_BUDGET),
-                this.model.getValue(Node.DAYS_A_YEAR),
-                this.model.getValue(Node.HOURLY_RATE),
-                this.model.getValue(Node.HEADCOUNT));
+        return this.formula.compute(
+                this.model.compute(Node.AVAILABLE_BUDGET),
+                this.model.compute(Node.DAYS_A_YEAR),
+                this.model.compute(Node.HOURLY_RATE),
+                this.model.compute(Node.HEADCOUNT));
     }
 }

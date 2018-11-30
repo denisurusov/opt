@@ -28,10 +28,15 @@ public class ModelLoader {
                         Direction.valueOf(nextNode.get("direction").asText()),
                         nextNode.get("step").floatValue(),
                         Unit.valueOf(nextNode.get("unit").asText()));
-                float baseline = nextNode.has("baseline") ? nextNode.get("baseline").floatValue() : 0;
                 //
+                JsonNode jb = nextNode.get("boundaries");
+                NodeBoundaries boundaries = new NodeBoundaries(
+                        jb.has("baseline") ? jb.get("baseline").floatValue() : 0,
+                        jb.has("minimum") ? jb.get("minimum").floatValue() : Float.MIN_VALUE,
+                        jb.has("maximum") ? jb.get("minimum").floatValue() : Float.MAX_VALUE
+                );
                 Class<?> c = Class.forName(nextNode.get("functionClassName").asText());
-                model.addNode(nextNode.get("id").asText(), new ComputePair(new NodeValue(node, baseline), (Function) (c.getConstructor(Model.class).newInstance(model))));
+                model.addNode(nextNode.get("id").asText(), new ComputePair(new NodeValue(node, boundaries), (Function) (c.getConstructor(Model.class).newInstance(model))));
             }
         } catch (Exception e) {
             throw new ModelLoadingException("Model loading failure - could not load model nodes", e);

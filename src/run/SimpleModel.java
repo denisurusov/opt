@@ -1,5 +1,8 @@
 package run;
 
+/*
+This silly model computes one node at a time.
+ */
 //TODO - unit test
 public class SimpleModel extends Model {
 
@@ -26,18 +29,18 @@ public class SimpleModel extends Model {
     }
 
     @Override
-    public void increase(String nodeName) {
-        this.computeEngine.get(nodeName).increase();
+    public void setTarget(String nodeName) {
+        this.computeEngine.get(nodeName).setTarget();
     }
 
     @Override
-    public void decrease(String nodeName) {
-        this.computeEngine.get(nodeName).decrease();
+    public void clearTarget(String nodeName) {
+        this.computeEngine.get(nodeName).clearTarget();
     }
 
     @Override
     public String toString() {
-        return this.computeEngine.values().stream().map(s -> s.toString() + "\n").reduce("", String::concat);
+        return "Model printout:\n" + this.computeEngine.values().stream().map(s -> s.toString() + "\n").reduce("", String::concat);
     }
 }
 

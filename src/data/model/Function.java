@@ -19,10 +19,6 @@ public abstract class Function {
         this.model = model;
     }
 
-    public void propagate() {
-        this.linkedNames.stream().forEach(s -> this.model.compute(s));
-    }
-
     @Override
     public String toString() {
         return "Function{" +

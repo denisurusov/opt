@@ -17,10 +17,9 @@ public abstract class Model {
 
     public abstract void setValue(String nodeName, float value);
 
-    public abstract void increase(String nodeName);
-
-    public abstract void decrease(String nodeName);
-
     public abstract float compute(String nodeName);
 
+    public abstract void setTarget(String nodeName);
+
+    public abstract void clearTarget(String nodeName);
 }

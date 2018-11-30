@@ -13,20 +13,17 @@ public class ComputePair {
         return this.value.compute(this.function);
     }
 
-    public void increase() {
-        this.value.increase();
-        this.function.propagate();
+    public void setTarget() {
+        this.value.setTarget();
     }
 
-    public void decrease() {
-        this.value.decrease();
-        this.function.propagate();
+    public void clearTarget() {
+        this.value.clearTarget();
     }
-    
+
     public void set(float value)
     {
         this.value.set(value);
-        this.function.propagate();
     }
     
     public void reset()

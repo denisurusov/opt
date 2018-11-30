@@ -23,9 +23,10 @@ public class FunctionAvailableBudget extends Function {
     }
 
     public float compute() {
-        return this.formula.compute(this.model.getValue(Node.DAYS_A_YEAR),
-                this.model.getValue(Node.HOURS_A_DAY),
-                this.model.getValue(Node.HOURLY_RATE),
-                this.model.getValue(Node.HEADCOUNT));
+        return this.formula.compute(
+                this.model.compute(Node.DAYS_A_YEAR),
+                this.model.compute(Node.HOURS_A_DAY),
+                this.model.compute(Node.HOURLY_RATE),
+                this.model.compute(Node.HEADCOUNT));
     }
 }

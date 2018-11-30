@@ -23,10 +23,11 @@ public class FunctionHeadcount extends Function {
     }
 
     public float compute() {
-        return this.formula.compute(this.model.getValue(Node.AVAILABLE_BUDGET),
-                this.model.getValue(Node.DAYS_A_YEAR),
-                this.model.getValue(Node.HOURS_A_DAY),
-                this.model.getValue(Node.HOURLY_RATE));
+        return this.formula.compute(
+                this.model.getValue(Node.AVAILABLE_BUDGET),
+                this.model.compute(Node.DAYS_A_YEAR),
+                this.model.compute(Node.HOURS_A_DAY),
+                this.model.compute(Node.HOURLY_RATE));
     }
 }
 
