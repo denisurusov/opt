@@ -18,7 +18,7 @@ public abstract class Function {
     }
 
     boolean computable() {
-        return !this.model.getTargets().anyMatch(this.linkedNames::contains);
+        return this.model.getTargets().noneMatch(this.linkedNames::contains);
     }
 
     @Override
