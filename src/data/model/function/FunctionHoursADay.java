@@ -1,8 +1,8 @@
 package data.model.function;
 
 import data.model.Function;
+import data.model.Model;
 import data.model.Node;
-import run.Model;
 
 
 public class FunctionHoursADay extends Function {

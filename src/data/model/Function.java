@@ -4,8 +4,6 @@ package data.model;
     I calculate the value of a given node when the nodes that are a part of the formula change
  */
 
-import run.Model;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +15,10 @@ public abstract class Function {
 
     public Function(Model model) {
         this.model = model;
+    }
+
+    boolean computable() {
+        return !this.model.getTargets().anyMatch(this.linkedNames::contains);
     }
 
     @Override

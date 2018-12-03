@@ -1,8 +1,8 @@
 package data.model.function;
 
 import data.model.Function;
+import data.model.Model;
 import data.model.Node;
-import run.Model;
 
 
 public class FunctionDaysAYear extends Function {
@@ -24,7 +24,7 @@ public class FunctionDaysAYear extends Function {
 
     public float compute() {
         return this.formula.compute(
-                this.model.getValue(Node.AVAILABLE_BUDGET),
+                this.model.compute(Node.AVAILABLE_BUDGET),
                 this.model.compute(Node.HOURS_A_DAY),
                 this.model.compute(Node.HOURLY_RATE),
                 this.model.compute(Node.HEADCOUNT));

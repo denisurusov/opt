@@ -10,24 +10,14 @@ public class ComputePair {
     }
 
     public float compute() {
-        return this.value.compute(this.function);
+        return (this.function.computable()) ? this.value.compute(this.function) : this.value.getCurrentValue();
     }
 
-    public void setTarget() {
-        this.value.setTarget();
-    }
-
-    public void clearTarget() {
-        this.value.clearTarget();
-    }
-
-    public void set(float value)
-    {
+    public void set(float value) {
         this.value.set(value);
     }
-    
-    public void reset()
-    {
+
+    public void reset() {
         this.value.reset();
     }
 

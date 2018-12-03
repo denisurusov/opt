@@ -1,5 +1,7 @@
 package run;
 
+import data.model.Model;
+
 public class ModelRunNodeToNode extends ModelRun {
     private String sourceId;
     private String targetId;
@@ -14,8 +16,8 @@ public class ModelRunNodeToNode extends ModelRun {
 
     @Override
     public void execute(Model model) {
-        model.setValue(this.sourceId, this.newValue);
         model.setTarget(this.targetId);
+        model.setValue(this.sourceId, this.newValue);
         System.out.println("Computed value:\t" + model.compute(this.targetId));
         model.clearTarget(this.targetId);
     }

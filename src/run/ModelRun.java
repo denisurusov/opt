@@ -1,5 +1,7 @@
 package run;
 
+import data.model.Model;
+
 public abstract class ModelRun {
 
     private String id;

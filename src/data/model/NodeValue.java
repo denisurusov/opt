@@ -7,7 +7,6 @@ public class NodeValue {
 
     private Node node;
     private float currentValue;
-    private boolean isTarget = false;
     private NodeBoundaries boundaries;
 
     public NodeValue(Node node) {
@@ -30,26 +29,17 @@ public class NodeValue {
      */
     public void reset() {
         this.currentValue = this.boundaries.getBaseline();
-        this.clearTarget();
     }
 
     /*
     compute value of this node  using set values of all dependencies (run the formula with getters)
      */
     public float compute(Function function) {
-        return this.currentValue = (isTarget ? this.currentValue : function.compute());
+        return function.compute();
     }
 
     public float getCurrentValue() {
         return currentValue;
-    }
-
-    public void setTarget() {
-        isTarget = true;
-    }
-
-    public void clearTarget() {
-        isTarget = false;
     }
 
     @Override

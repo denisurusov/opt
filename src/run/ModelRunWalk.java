@@ -1,6 +1,7 @@
 package run;
 
 import data.model.Direction;
+import data.model.Model;
 
 import java.util.ArrayList;
 import java.util.List;

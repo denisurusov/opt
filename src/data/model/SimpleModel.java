@@ -1,4 +1,4 @@
-package run;
+package data.model;
 
 /*
 This silly model computes one node at a time.
@@ -13,9 +13,7 @@ public class SimpleModel extends Model {
 
     @Override
     public void reset() {
-        System.out.println("Model reset start...");
         this.computeEngine.values().stream().forEach(v -> v.reset());
-        System.out.println("Model reset complete.");
     }
 
     @Override
@@ -30,12 +28,12 @@ public class SimpleModel extends Model {
 
     @Override
     public void setTarget(String nodeName) {
-        this.computeEngine.get(nodeName).setTarget();
+        this.targets.add(nodeName);
     }
 
     @Override
     public void clearTarget(String nodeName) {
-        this.computeEngine.get(nodeName).clearTarget();
+        this.targets.remove(nodeName);
     }
 
     @Override
